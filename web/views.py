@@ -10,6 +10,13 @@ from django import forms
 import json
 import os
 
+import io
+import base64
+
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 PreferredUnits.distance = Unit.Meter
 PreferredUnits.velocity = Unit.MPS
 PreferredUnits.drop = Unit.Meter
@@ -20,6 +27,7 @@ class ShotForm(forms.Form):
     weapon = forms.ModelChoiceField(queryset=models.Weapon.objects.all(), initial=1)
     ammo = forms.ModelChoiceField(queryset=models.Ammo.objects.all(), initial=1)
     distance = forms.FloatField(initial=100, label='Distance (m)')
+    plot = forms.BooleanField(required=False, initial=False, label='Plot')
 
 def read_coordinates(file_path):
     if os.path.exists(file_path):
@@ -38,6 +46,7 @@ def write_coordinates(file_path, x, y):
 def shot_view(request):
     form = ShotForm()
     info = None
+    plot = None
 
     if request.method == 'POST':
         form = ShotForm(request.POST)
@@ -93,14 +102,31 @@ def shot_view(request):
 
             # Read current coordinates
             coordinates_file = "/home/kolimator/coordinates.json"
-            current_x, current_y = read_coordinates(coordinates_file)
+            center_x, center_y = 512, 425
 
             # Calculate pixel shift
             pixel_shift = moa_shift / 0.3448
 
             # Update coordinates
-            new_x = current_x + pixel_shift
-            write_coordinates(coordinates_file, new_x, current_y)
+            new_x = center_x + pixel_shift
+            write_coordinates(coordinates_file, new_x, center_y)
+            
+            if form.cleaned_data['plot']:
 
-    return render(request, 'web/shot.html', {'form': form, 'info': info})
+                shot_result = calc2.fire(
+                    shot=shot,
+                    trajectory_range=Distance.Meter(distance*1.5),
+                    extra_data=True
+                )
+
+                ax = shot_result.plot()
+
+                buf = io.BytesIO()
+                plt.savefig(buf, format='png')
+                buf.seek(0)
+                plot = base64.b64encode(buf.getvalue()).decode('utf-8')
+                buf.close()
+            
+
+    return render(request, 'web/shot.html', {'form': form, 'plot': plot, 'info': info})
 
