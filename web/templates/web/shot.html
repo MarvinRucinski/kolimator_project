@@ -1,0 +1,22 @@
+<a href="/admin">Konfiguracja</a>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% for field in form %}
+    <div class="form-group">{{ field.label }}
+      {{ field }}</div>
+  {% endfor %}
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Calculate</button>
+  </div>
+</form>
+
+{% if plot %}
+  <img src="data:image/png;base64,{{ plot }}" style="max-width: 100%;" />
+{% endif %}
+
+{% if info %}
+  <p>{{ info }}</p>
+{% endif %}
