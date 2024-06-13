@@ -108,7 +108,7 @@ def shot_view(request):
             pixel_shift = moa_shift / 0.3448
 
             # Update coordinates
-            new_x = center_x + pixel_shift
+            new_x = center_x - pixel_shift
             write_coordinates(coordinates_file, new_x, center_y)
             
             if form.cleaned_data['plot']:
