@@ -1,12 +1,12 @@
 #bg .bg-block {
     width: 100px;
     height: 100px;
-    border: .1px solid #6a6a6a;
+    border: .1px solid #6a6a6a90;
     position: relative;
 }
 
 #bg .bg-block .bg-dot {
-    background-color: #a9a9a9;
+    background-color: #a9a9a99f;
     width: 2.5px;
     height: 2.5px;
     position: absolute;
@@ -48,12 +48,17 @@
     src: url("Letter Gothic MT Std Bold.otf") format("opentype");
 }
 
+:root {
+    --color-primary: rgb(209, 163, 36);
+    --color-primary-lighter: rgb(225, 180, 33);
+}
+
 html {
     font-family: LetterGothicMTStd-Bold !important;
 }
 
 h1 {
-    color: rgb(209, 163, 36);
+    color: var(--color-primary);
     font-size: 4rem !important;
 }
 
@@ -63,6 +68,7 @@ body {
     /* align-items: center; */
     color: white;
     text-align: center;
+    font-size: 1.2rem;
 }
 
 input,
@@ -72,6 +78,21 @@ select {
 
 input {
     width: 100px;
+}
+
+input[type="checkbox"] {
+    color: var(--color-primary-lighter) !important;
+    outline: none;
+    border: 1px solid rgb(155, 155, 155);
+    background-color: rgba(155, 155, 155, 0.291);
+
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+}
+
+input[type="checkbox"]:hover {
+    background-color: rgba(155, 155, 155, 0.494);
 }
 
 button {
@@ -87,18 +108,18 @@ button {
     width: auto;
     display: inline-block;
     position: relative;
-    background-color: rgba(155, 155, 155, 0.094);
+    background-color: rgba(155, 155, 155, 0.291);
     transition: background-color 0.15s;
 }
 
 .button:hover {
-    background-color: rgba(155, 155, 155, 0.294);
+    background-color: rgba(155, 155, 155, 0.494);
 }
 
 .button-cross1 {
     --size: 15px;
     background-color: #bbbbbb;
-    width: 2px;
+    width: 1.5px;
     height: var(--size);
     right: -1px;
     top: calc(var(--size) / -2);
@@ -109,7 +130,7 @@ button {
     --size: 15px;
     background-color: #bbbbbb;
     width: var(--size);
-    height: 2px;
+    height: 1.5px;
     right: calc(var(--size) / -2);
     top: -1px;
     position: absolute;

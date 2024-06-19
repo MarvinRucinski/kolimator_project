@@ -37,21 +37,21 @@
         <div id="bg"></div>
       </div>
       <div class="w-full">
-        <div class="text-center mt-24">
-          <h1>Kolimator</h1>
+        <div class="text-center mt-16">
+          <h1>Electronic Targeting System</h1>
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-12">
           <form method="post">
             {% csrf_token %}
 
             {% for field in form %}
-              <div class="form-group">{{ field.label }}
+              <div class="form-group mt-1">{{ field.label }}
                 {{ field }}</div>
             {% endfor %}
 
-            <div class="form-group mt-2">
+            <div class="form-group mt-4">
               <div class="button">
                 <button type="submit" class="btn btn-primary">Calculate</button>
                 <div class="button-cross1"></div>
@@ -61,11 +61,11 @@
           </form>
 
           {% if info %}
-            <p>{{ info }}</p>
+            <p class="text-xl">{{ info }}</p>
           {% endif %}
 
           {% if plot %}
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-3">
               <img src="data:image/png;base64,{{ plot }}" class="max-w-full rounded-xl w-[500px]" />
             </div>
           {% endif %}

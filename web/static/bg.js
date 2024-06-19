@@ -4,8 +4,13 @@ var bg = document.getElementById("bg")
 
 function getRandomColor() {
     const opacity = Math.floor(Math.random() * 10).toString(16);
-    color = "#BBCCFF" + opacity.padStart(2, "0");
-    // console.log(color);
+    var color = "#";
+    const newColor = Math.floor(Math.random() * 256).toString(16).padStart(2, "0");
+    for (var i = 0; i < 3; i++) {
+        color += newColor;
+    }
+    color += opacity.padStart(2, "0");
+    console.log(color);
     return color;
 }
 
