@@ -1,4 +1,4 @@
-<a href="/admin">Konfiguracja</a>
+{% comment %} <a href="/admin">Konfiguracja</a>
 
 <form method="post">
   {% csrf_token %}
@@ -19,4 +19,59 @@
 
 {% if info %}
   <p>{{ info }}</p>
-{% endif %}
+{% endif %} {% endcomment %}
+
+{% comment %} <p class="font-bold">Witaj w aplikacji do analizy zdjęć!</p> {% endcomment %}
+
+{% load static %}
+{% load tailwind_tags %}
+<html>
+  <head>
+    <title>Kolimator</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    {% tailwind_css %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="overflow-hidden w-screen absolute top-0 left-0 m-0 h-screen -z-10">
+        <div id="bg"></div>
+      </div>
+      <div class="w-full">
+        <div class="text-center mt-24">
+          <h1>Kolimator</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <form method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+              <div class="form-group">{{ field.label }}
+                {{ field }}</div>
+            {% endfor %}
+
+            <div class="form-group mt-2">
+              <div class="button">
+                <button type="submit" class="btn btn-primary">Calculate</button>
+                <div class="button-cross1"></div>
+                <div class="button-cross2"></div>
+              </div>
+            </div>
+          </form>
+
+          {% if info %}
+            <p>{{ info }}</p>
+          {% endif %}
+
+          {% if plot %}
+            <div class="flex justify-center">
+              <img src="data:image/png;base64,{{ plot }}" class="max-w-full rounded-xl w-[500px]" />
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="{% static 'bg.js' %}"></script>
+</html>

@@ -24,8 +24,10 @@ admin.site.has_permission = lambda r: setattr(r, 'user', AccessUser()) or True
 
 
 from web.views import shot_view
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', shot_view, name='shot')
+    path('', shot_view, name='shot'),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]

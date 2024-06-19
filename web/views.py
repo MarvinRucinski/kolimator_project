@@ -30,7 +30,7 @@ class ShotForm(forms.Form):
     plot = forms.BooleanField(required=False, initial=False, label='Plot')
 
 def read_coordinates(file_path):
-    if os.path.exists(file_path):
+    if os.path.isfile(file_path):
         with open(file_path, 'r') as file:
             data = json.load(file)
             print(f"Read coordinates: {data}")  # Debugging output
@@ -38,6 +38,9 @@ def read_coordinates(file_path):
     return 0, 0
 
 def write_coordinates(file_path, x, y):
+    if not os.path.isfile(file_path):
+        return
+    
     with open(file_path, 'w') as file:
         data = {'x': x, 'y': y}
         json.dump(data, file)
@@ -108,7 +111,7 @@ def shot_view(request):
             pixel_shift = moa_shift / 0.3448
 
             # Update coordinates
-            new_x = center_x - pixel_shift
+            new_x = center_x + pixel_shift
             write_coordinates(coordinates_file, new_x, center_y)
             
             if form.cleaned_data['plot']:
