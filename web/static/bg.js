@@ -3,9 +3,9 @@ var bg = document.getElementById("bg")
 
 
 function getRandomColor() {
-    const opacity = Math.floor(Math.random() * 10).toString(16);
+    const opacity = Math.floor(Math.random() * 65).toString(16);
     var color = "#";
-    const newColor = Math.floor(Math.random() * 256).toString(16).padStart(2, "0");
+    const newColor = Math.floor(Math.random() * 45).toString(16).padStart(2, "0");
     for (var i = 0; i < 3; i++) {
         color += newColor;
     }
@@ -21,6 +21,14 @@ for (var i = 0; i < 17 * 10; i++) {
 
     var dot = document.createElement("div");
     dot.className = "bg-dot";
+    div.appendChild(dot);
+
+    var dot = document.createElement("div");
+    dot.className = "bg-dot-top";
+    div.appendChild(dot);
+
+    var dot = document.createElement("div");
+    dot.className = "bg-dot-left";
     div.appendChild(dot);
 
     var corner = document.createElement("div");

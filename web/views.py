@@ -50,6 +50,8 @@ def shot_view(request):
     form = ShotForm()
     info = None
     plot = None
+    weapon_model = models.Weapon.objects.first()
+    ammo_model = models.Ammo.objects.first()
 
     if request.method == 'POST':
         form = ShotForm(request.POST)
@@ -123,6 +125,8 @@ def shot_view(request):
                 )
 
                 ax = shot_result.plot()
+                ax.set_facecolor((.9, .9, .9, .8))
+                ax.get_figure().set_facecolor((0, 0, 0, 0))
 
                 buf = io.BytesIO()
                 plt.savefig(buf, format='png')
@@ -131,5 +135,5 @@ def shot_view(request):
                 buf.close()
             
 
-    return render(request, 'web/shot.html', {'form': form, 'plot': plot, 'info': info})
+    return render(request, 'web/shot.html', {'form': form, 'plot': plot, 'info': info, 'weapon': weapon_model, 'ammo': ammo_model})
 

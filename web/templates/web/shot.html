@@ -27,7 +27,7 @@
 {% load tailwind_tags %}
 <html>
   <head>
-    <title>Kolimator</title>
+    <title>Electronic Targeting System</title>
     <link rel="stylesheet" href="{% static 'style.css' %}" />
     {% tailwind_css %}
   </head>
@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-12">
+        <div class="flex items-center justify-center gap-20">
           <form method="post">
             {% csrf_token %}
 
@@ -60,13 +60,46 @@
             </div>
           </form>
 
+          <div class="text-left flex flex-col justify-center items-center">
+            <div class="flex flex-row items-center justify-center gap-10">
+              <div>
+                <p class="text-2xl text-[--color-primary]">Weapon: {{ weapon }}</p>
+                <p class="text-lg">Sight height: {{ weapon.sight_height }} cm</p>
+                <p class="text-lg">Zero distance: {{ weapon.zero_distance }} m</p>
+                <p class="text-lg">Twist: {{ weapon.twist }} inches</p>
+              </div>
+              <div>
+                <p class="text-2xl mt-4 text-[--color-primary]">Ammo: {{ ammo }}</p>
+                <p class="text-lg">Length: {{ ammo.length }} inches</p>
+                <p class="text-lg">Weight: {{ ammo.weight }} grains</p>
+                <p class="text-lg">Muzzle velocity: {{ ammo.muzzle_velocity }} mps</p>
+                <p class="text-lg">Diameter: {{ ammo.diameter }} inches</p>
+                <p class="text-lg">Ballistic coefficient: {{ ammo.value }}</p>
+                <p class="text-lg">Drag function: {{ ammo.drag_table }}</p>
+              </div>
+            </div>
+
+            <a href="/admin">
+              <div class="button button-small mt-3">
+                <button class="btn btn-primary">Configure guns and ammo</button>
+                <div class="button-cross1"></div>
+                <div class="button-cross2"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-6">
           {% if info %}
-            <p class="text-xl">{{ info }}</p>
+            <p class="text-3xl text-[--color-primary]">Aim {{ info }}</p>
           {% endif %}
 
           {% if plot %}
             <div class="flex justify-center mt-3">
-              <img src="data:image/png;base64,{{ plot }}" class="max-w-full rounded-xl w-[500px]" />
+              <div class="flex flex-col items-start">
+                <p class="ml-6 -mb-8 text-xl">Plot:</p>
+                <img src="data:image/png;base64,{{ plot }}" class="max-w-full rounded-xl w-[500px] plot" />
+              </div>
             </div>
           {% endif %}
         </div>
