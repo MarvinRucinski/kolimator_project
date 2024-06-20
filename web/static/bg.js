@@ -14,7 +14,7 @@ function getRandomColor() {
     return color;
 }
 
-for (var i = 0; i < 17 * 10; i++) {
+for (var i = 0; i < 17 * 11; i++) {
     var div = document.createElement("div");
     div.className = "bg-block";
     div.style.backgroundColor = getRandomColor();
