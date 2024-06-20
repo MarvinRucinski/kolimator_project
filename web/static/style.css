@@ -95,6 +95,12 @@ select {
     color: black !important;
 }
 
+input:focus,
+select:focus {
+    border-color: var(--color-primary) !important;
+    --tw-ring-color: var(--color-primary) !important;
+}
+
 input {
     width: 100px;
 }
