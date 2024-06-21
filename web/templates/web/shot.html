@@ -28,6 +28,9 @@
 <html>
   <head>
     <title>Electronic Targeting System</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="{% static 'style.css' %}" />
     {% tailwind_css %}
   </head>
@@ -42,8 +45,8 @@
         </div>
       </div>
       <div class="row mt-3">
-        <div class="flex items-center justify-center gap-20">
-          <form method="post">
+        <div class="flex flex-wrap items-center justify-center gap-x-20 gap-y-5">
+          <form method="post" class="half-block">
             {% csrf_token %}
 
             {% for field in form %}
@@ -60,8 +63,8 @@
             </div>
           </form>
 
-          <div class="text-left flex flex-col justify-center items-center">
-            <div class="flex flex-row items-center justify-center gap-10">
+          <div class="text-left flex flex-col justify-center items-center half-block">
+            <div class="flex flex-row flex-wrap items-center justify-center gap-10">
               <div>
                 <p class="text-2xl text-[--color-primary]">Weapon: {{ weapon }}</p>
                 <p class="text-lg">Sight height: {{ weapon.sight_height }} cm</p>
