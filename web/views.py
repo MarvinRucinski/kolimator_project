@@ -23,10 +23,16 @@ PreferredUnits.drop = Unit.Meter
 PreferredUnits.sight_height = Unit.Centimeter
 PreferredUnits.temperature = Unit.Celsius
 
+# get distance from laser rangefinder
+def get_distance(fast = False):
+    return 100
+
+
 class ShotForm(forms.Form):
     weapon = forms.ModelChoiceField(queryset=models.Weapon.objects.all(), initial=1)
     ammo = forms.ModelChoiceField(queryset=models.Ammo.objects.all(), initial=1)
     distance = forms.FloatField(initial=100, label='Distance (m)')
+    mode = forms.ChoiceField(choices=[('manual', 'MANUAL'), ('slow', 'AUTO: SLOW'), ('fast', 'AUTO: FAST')], initial='manual', label='Rangefinder mode')
     plot = forms.BooleanField(required=False, initial=False, label='Plot')
 
 def read_coordinates(file_path):
@@ -60,6 +66,18 @@ def shot_view(request):
             weapon_model = form.cleaned_data['weapon']
             ammo_model = form.cleaned_data['ammo']
             distance = form.cleaned_data['distance']
+            rangefinder_mode = form.cleaned_data['mode']
+
+            if rangefinder_mode == 'slow':
+                distance = get_distance()
+                form.data._mutable = True
+                form.data['distance'] = distance
+            elif rangefinder_mode == 'fast':
+                distance = get_distance(fast = True)
+                form.data._mutable = True
+                form.data['distance'] = distance
+
+            print(form)
 
             drag_tables = {
                 'G1': TableG1,
