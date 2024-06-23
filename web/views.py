@@ -10,6 +10,8 @@ from django import forms
 import json
 import os
 
+from .get_distance import get_distance
+
 import io
 import base64
 
@@ -22,10 +24,6 @@ PreferredUnits.velocity = Unit.MPS
 PreferredUnits.drop = Unit.Meter
 PreferredUnits.sight_height = Unit.Centimeter
 PreferredUnits.temperature = Unit.Celsius
-
-# get distance from laser rangefinder
-def get_distance(fast = False):
-    return 100
 
 
 class ShotForm(forms.Form):
@@ -58,6 +56,7 @@ def shot_view(request):
     plot = None
     weapon_model = models.Weapon.objects.first()
     ammo_model = models.Ammo.objects.first()
+    err = None
 
     if request.method == 'POST':
         form = ShotForm(request.POST)
@@ -69,13 +68,17 @@ def shot_view(request):
             rangefinder_mode = form.cleaned_data['mode']
 
             if rangefinder_mode == 'slow':
-                distance = get_distance()
-                form.data._mutable = True
-                form.data['distance'] = distance
+                distance_read, err = get_distance()
+                if distance_read:
+                    distance = distance_read
+                    form.data._mutable = True
+                    form.data['distance'] = distance_read
             elif rangefinder_mode == 'fast':
-                distance = get_distance(fast = True)
-                form.data._mutable = True
-                form.data['distance'] = distance
+                distance_read, err = get_distance(fast = True)
+                if distance_read:
+                    distance = distance_read
+                    form.data._mutable = True
+                    form.data['distance'] = distance_read
 
             drag_tables = {
                 'G1': TableG1,
@@ -151,5 +154,5 @@ def shot_view(request):
                 buf.close()
             
 
-    return render(request, 'web/shot.html', {'form': form, 'plot': plot, 'info': info, 'weapon': weapon_model, 'ammo': ammo_model})
+    return render(request, 'web/shot.html', {'form': form, 'plot': plot, 'info': info, 'weapon': weapon_model, 'ammo': ammo_model, 'err': err})
 

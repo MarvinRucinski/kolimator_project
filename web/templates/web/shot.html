@@ -93,6 +93,10 @@
         </div>
 
         <div class="mt-6">
+          {% if err %}
+            <p class="text-3xl text-[--color-primary]">Error: {{ err }}</p>
+          {% endif %}
+
           {% if info %}
             <p class="text-3xl text-[--color-primary]">Aim {{ info }}</p>
           {% endif %}
