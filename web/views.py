@@ -77,8 +77,6 @@ def shot_view(request):
                 form.data._mutable = True
                 form.data['distance'] = distance
 
-            print(form)
-
             drag_tables = {
                 'G1': TableG1,
                 'G7': TableG7,
