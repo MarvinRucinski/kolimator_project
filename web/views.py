@@ -27,7 +27,7 @@ PreferredUnits.temperature = Unit.Celsius
 
 
 coordinates_file = "/home/kolimator/coordinates.json"
-center_x, center_y = 1350, 425
+center_x, center_y = 1300, 425
 
 drag_tables = {
     'G1': TableG1,
