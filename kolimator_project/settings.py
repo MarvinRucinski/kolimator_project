@@ -135,3 +135,4 @@ INTERNAL_IPS = [
 ]
 
 NPM_BIN_PATH='/usr/bin/npm'
+MEDIA_ROOT = BASE_DIR / 'media'

@@ -53,6 +53,10 @@
               <div class="form-group mt-1">{{ field.label }}
                 {{ field }}</div>
             {% endfor %}
+            <div class="form-group mt-1">
+            Crosshair color: <button data-jscolor="{preset:'dark', value:'rgb({{color_r}},{{color_g}},{{color_b}})', palette:'#88ff20 #22ffff #269aff #fff #ff5525 #ffe438 #bb1cd4', hideOnPaletteClick:true, valueElement:'#c-val'}">
+            </div>
+            <input id="c-val" value="rgb({{color_r}},{{color_g}},{{color_b}})" name="color" type="hidden">
 
             <div class="form-group mt-4">
               <div class="button">
@@ -114,4 +118,5 @@
     </div>
   </body>
   <script src="{% static 'bg.js' %}"></script>
+  <script src="{% static 'jscolor.js' %}"></script>
 </html>

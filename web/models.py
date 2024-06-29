@@ -1,3 +1,4 @@
+from turtle import width
 from django.db import models
 
 class Weapon(models.Model):
@@ -38,3 +39,29 @@ class Ammo(models.Model):
     def __str__(self):
         return self.name
 
+class Crosshair(models.Model):
+    name = models.CharField(max_length=255)
+    file = models.ImageField(upload_to='crosshairs/')
+
+    def __str__(self):
+        return self.name
+class CurrentSetting(models.Model):
+    weapon = models.ForeignKey(Weapon, on_delete=models.CASCADE)
+    ammo = models.ForeignKey(Ammo, on_delete=models.CASCADE)
+    distance = models.FloatField(default=100)
+
+    color_r = models.IntegerField(default=255)
+    color_g = models.IntegerField(default=255)
+    color_b = models.IntegerField(default=255)
+
+    mode = models.TextField(choices=[('manual', 'MANUAL'), ('slow', 'AUTO: SLOW'), ('fast', 'AUTO: FAST')], default='manual', verbose_name='Rangefinder mode')
+
+    plot = models.BooleanField(default=True)
+
+    crosshair = models.ForeignKey(Crosshair, on_delete=models.SET_NULL, null=True, blank=True)
+    crosshair_size = models.IntegerField(default=40)
+    crosshair_width = models.IntegerField(default=8)
+
+
+
+    
