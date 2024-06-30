@@ -25,6 +25,9 @@ PreferredUnits.drop = Unit.Meter
 PreferredUnits.sight_height = Unit.Centimeter
 PreferredUnits.temperature = Unit.Celsius
 
+def set_laser(on=True):
+    print(f"Setting laser to {on}")
+    pass
 
 coordinates_file = "/home/kolimator/coordinates.json"
 center_x, center_y = 1300, 425
@@ -43,7 +46,7 @@ drag_tables = {
 class ShotForm(forms.ModelForm):
     class Meta:
         model = models.CurrentSetting
-        fields = ['weapon', 'ammo', 'distance', 'mode', 'plot', 'crosshair', 'crosshair_size', 'crosshair_width']
+        fields = ['weapon', 'ammo', 'distance', 'mode', 'laser', 'plot', 'crosshair', 'crosshair_size', 'crosshair_width']
     
     def __init__(self, *args, **kwargs):
         super(ShotForm, self).__init__(*args, **kwargs)
@@ -69,7 +72,8 @@ def write_coordinates(x, y, settings_instance):
             "b": settings_instance.color_b,
             "width": 4,
             "size": 40
-        }
+        },
+        "distance": settings_instance.distance,
     }
     
     if not os.path.isfile(coordinates_file):
@@ -122,6 +126,11 @@ def shot_view(request):
             form.instance.color_b = color[2]    
 
         form.save()
+
+        if form.cleaned_data['laser']:
+            set_laser(True)
+        else:
+            set_laser(False)
 
     if weapon_model and ammo_model:
 

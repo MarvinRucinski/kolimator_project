@@ -62,6 +62,8 @@ class CurrentSetting(models.Model):
     crosshair_size = models.IntegerField(default=40)
     crosshair_width = models.IntegerField(default=8)
 
+    laser = models.BooleanField(default=False)
+
 
 
     
