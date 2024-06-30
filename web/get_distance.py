@@ -1,5 +1,10 @@
 import time
-import serial
+import importlib.util
+
+if importlib.util.find_spec("serial"):
+    import serial
+else:
+    print("WARNING: Serial library not found. Please install it with 'pip install pyserial'")
 
 def get_distance(fast=False):
     autobdr = bytes([0x55])
