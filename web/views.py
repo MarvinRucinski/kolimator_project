@@ -72,7 +72,8 @@ def write_coordinates(x, y, settings_instance):
             "b": settings_instance.color_b,
             "width": 4,
             "size": 40
-        }
+        },
+        "distance": settings_instance.distance,
     }
     
     if not os.path.isfile(coordinates_file):
