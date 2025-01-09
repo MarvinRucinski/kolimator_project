@@ -1,14 +1,18 @@
 # Electronic Targeting System
 
-A shared success with pride on the podium! 🏆
+Our team has developed an innovative collimator – an optical device designed for precise aiming, commonly used in sports and military applications. Unlike other collimators available on the European market, our model features a dynamically adjustable reticle. A ballistic calculator computes the projectile’s trajectory based on the distance to the target (measured by a laser rangefinder), the type of weapon, and the ammunition used, adjusting the hologram’s position accordingly.
 
-A project that started as an ambitious idea has transformed into a working prototype and won 2nd place at the Team Projects Conference organized by Wrocław University of Science and Technology. Together with the team, we created CTS – a computer-assisted electronic sighting system.
+The project leverages cutting-edge technologies:
 
-Our solution allows for dynamic correction of the aiming mark, taking into account key weapon and ammunition parameters. We proved that it is possible to create a solid and functional system for a fraction of the market price of premium-class collimators.
+- Raspberry Pi for performance and flexibility,
+- Web application for remote data management,
+- OLED display,
+- Optical system based on mirrors and lenses to create a hologram,
+- No mechanical components, ensuring quiet and reliable operation.
 
-I want to thank the team for the collaborative effort, Mateusz Żurawski for his mentoring, and Comarch for supporting this event and us – young innovators! 🚀
+Our device stands out for its practicality and innovation. By adopting an interdisciplinary approach, we have integrated electronics, programming, and engineering into a comprehensive solution that delivers precision and efficiency.
 
-[Demo (in Polish)](https://youtu.be/mxnaJ6cRivI)
+[Video demo (in Polish)](https://youtu.be/mxnaJ6cRivI)
 
 ## Requirements
 
