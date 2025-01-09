@@ -14,6 +14,15 @@ Our device stands out for its practicality and innovation. By adopting an interd
 
 [Video demo (in Polish)](https://youtu.be/mxnaJ6cRivI)
 
+<div style="display: flex;">
+    <img src="https://github.com/MarvinRucinski/kolimator_project/blob/main/photos/photo3.jpeg?raw=true" alt="drawing" width="49%"/>
+    <img src="https://github.com/MarvinRucinski/kolimator_project/blob/main/photos/photo2.jpeg?raw=true" alt="drawing" width="49%"/>
+    <img src="https://github.com/MarvinRucinski/kolimator_project/blob/main/photos/photo1.jpeg?raw=true" alt="drawing" width="49%"/>
+    <img src="https://github.com/MarvinRucinski/kolimator_project/blob/main/photos/render.png?raw=true" alt="drawing" width="49%"/>
+    <img src="https://github.com/MarvinRucinski/kolimator_project/blob/main/photos/mockup.png?raw=true" alt="drawing" width="30%"/>
+</div>
+
+
 ## Requirements
 
 - Python 3.x
