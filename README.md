@@ -8,6 +8,8 @@ Our solution allows for dynamic correction of the aiming mark, taking into accou
 
 I want to thank the team for the collaborative effort, Mateusz Żurawski for his mentoring, and Comarch for supporting this event and us – young innovators! 🚀
 
+[Demo (in Polish)](https://youtu.be/mxnaJ6cRivI)
+
 ## Requirements
 
 - Python 3.x
